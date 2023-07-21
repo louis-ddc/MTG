@@ -1,5 +1,8 @@
 library(rvest)
 library(httr)
+# Charger les bibliothèques nécessaires
+library(rvest)
+library(httr)
 
 # Fonction pour récupérer le prix moyen d'une carte sur Cardmarket
 recuperer_prix_moyen_carte <- function(nom_carte) {
@@ -24,18 +27,26 @@ recuperer_prix_moyen_carte <- function(nom_carte) {
     
     return(prix_moyen)
   } else {
-    cat("Erreur lors de la récupération des données.\n")
+    cat("Erreur lors de la récupération des données pour la carte", nom_carte, "\n")
     return(NULL)
   }
 }
 
-# Exemple d'utilisation pour récupérer le prix moyen du "Black Lotus"
-nom_carte <- "Black Lotus"
-prix_moyen_carte <- recuperer_prix_moyen_carte(nom_carte)
+# Liste des cartes à récupérer les prix
+liste_cartes <- c("Black Lotus", "Ancestral Recall", "Time Walk", "Mox Pearl", "Mox Sapphire")
 
-# Afficher le prix moyen de la carte dans la console
-if (!is.null(prix_moyen_carte)) {
-  cat("Le prix moyen de la carte", nom_carte, "est de", prix_moyen_carte, "euros.\n")
-} else {
-  cat("Impossible de récupérer le prix moyen de la carte", nom_carte, ". Vérifiez le nom de la carte ou réessayez plus tard.\n")
+# Créer un tableau pour stocker les résultats
+resultats_prix <- data.frame(Nom_Carte = character(), Prix_Moyen_Euro = numeric(), stringsAsFactors = FALSE)
+
+# Récupérer les prix pour chaque carte dans la liste
+for (carte in liste_cartes) {
+  prix_carte <- recuperer_prix_moyen_carte(carte)
+  
+  # Ajouter les résultats dans le tableau
+  if (!is.null(prix_carte)) {
+    resultats_prix <- rbind(resultats_prix, data.frame(Nom_Carte = carte, Prix_Moyen_Euro = prix_carte))
+  }
 }
+
+# Afficher les résultats
+print(resultats_prix)

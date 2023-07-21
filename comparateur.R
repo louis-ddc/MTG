@@ -23,10 +23,10 @@ creer_tableau_occurrences <- function(liste_tableaux) {
   return(comptage)
 }
 
-# Exemple d'utilisation avec 3 tableaux (vous pouvez en ajouter autant que vous le souhaitez)
-tableau1 <- read.csv("deck1.csv")
-tableau2 <- read.csv("deck2.csv")
-tableau3 <- read.csv("deck3.csv")
+# Charger les tableaux à partir des fichiers CSV
+tableau1 <- read.csv("deck1.csv", header = FALSE)$V1
+tableau2 <- read.csv("deck2.csv", header = FALSE)$V1
+tableau3 <- read.csv("deck3.csv", header = FALSE)$V1
 
 # Créer le tableau final des occurrences
 tableau_final <- creer_tableau_occurrences(list(tableau1, tableau2, tableau3))

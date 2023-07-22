@@ -41,3 +41,4 @@ tableau_final_filtre <- tableau_final %>%
 
 # Afficher le nouveau tableau filtré dans la console
 print(tableau_final_filtre)
+write.csv(tableau_final_filtre, file = "tableau_final_filtre.txt", row.names = FALSE)
